@@ -1,0 +1,41 @@
+{
+    "name": "agencednd/magento-connector-bundle",
+    "type": "symfony-bundle",
+    "description": "DnD PIM bundle to export to Magento platform",
+    "keywords": ["pim", "dnd", "ecommerce", "e-commerce", "magento", "connector", "sftp"],
+    "homepage": "http://dnd.fr",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name":     "Florian Fauvel",
+            "email":    "florian.fauvel@dnd.fr",
+            "homepage": "http://www.dnd.fr/"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/akeneo/pim-community-dev.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/akeneo/platform.git"
+        },
+        {
+            "type": "vcs",
+            "url": "http://github.com/Agence-DnD/DnD-MagentoConnectorBundle.git"
+        }
+    ],
+    "require": {
+        "ext-ssh2": "*",
+        "akeneo/pim-community-dev": "1.2.*@stable"
+    },
+    "autoload": {
+        "psr-0": { "DnD\\Bundle\\MagentoConnectorBundle\\": "" }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "dev",
+    "target-dir": "DnD/Bundle/MagentoConnectorBundle"
+}

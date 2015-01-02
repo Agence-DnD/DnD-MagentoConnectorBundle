@@ -1,0 +1,1 @@
+parameters:    pim_base_connector.reader.orm.entity.class: Pim\Bundle\BaseConnectorBundle\Reader\ORM\EntityReader    services:    # readers    dnd_magento_connector.reader.orm.family:        class: %pim_base_connector.reader.orm.entity.class%        arguments:            - '@doctrine.orm.default_entity_manager'            - %pim_catalog.entity.family.class%

@@ -1,0 +1,1 @@
+<?phpnamespace DnD\Bundle\MagentoConnectorBundle;use Symfony\Component\HttpKernel\Bundle\Bundle;class DnDMagentoConnectorBundle extends Bundle{}
