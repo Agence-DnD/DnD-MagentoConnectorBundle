@@ -35,7 +35,18 @@ Récuperer composer :
 
 Installer le DnD-MagentoConnectorBundle avec composer :
 
-    $ php composer.phar require agencednd/magento-connector-bundle:1.0.*@stable
+Dans votre composer.json, ajouter le code suivant :
+
+- Dans repositories :
+
+    {
+        "type": "vcs",
+        "url": "http://github.com/Agence-DnD/DnD-MagentoConnectorBundle.git"
+    }
+
+- Dans require :
+
+    "agencednd/magento-connector-bundle":"1.1"
 
 Activer le bundle dans le fichier 'app/AppKernel.php', dans la fonction 'registerBundles', avant la ligne 'return $bundles' :
 
