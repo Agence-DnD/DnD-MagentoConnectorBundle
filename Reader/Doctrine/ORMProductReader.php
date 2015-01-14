@@ -102,6 +102,11 @@ class ORMProductReader extends AbstractConfigurableStepElement implements Produc
     protected $batchExportID = 1;
 
     /**
+     * @var boolean
+     */
+    protected $isEnabled = true;
+
+    /**
      * get exportFrom
      *
      * @return string exportFrom
@@ -145,6 +150,30 @@ class ORMProductReader extends AbstractConfigurableStepElement implements Produc
     public function setBatchExportID($batchExportID)
     {
         $this->batchExportID = $batchExportID;
+
+        return $this;
+    }
+
+    /**
+     * get isEnabled
+     *
+     * @return boolean isEnabled
+     */
+    public function getIsEnabled()
+    {
+        return $this->isEnabled;
+    }
+
+    /**
+     * Set isEnabled
+     *
+     * @param string isEnabled $isEnabled
+     *
+     * @return AbstractProcessor
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
 
         return $this;
     }
@@ -258,6 +287,14 @@ class ORMProductReader extends AbstractConfigurableStepElement implements Produc
                     'label'   => 'dnd_magento_connector.export.batchExportID.label',
                 )
             ),
+            'isEnabled' => array(
+                'type'    => 'switch',
+                'required' => false,
+                'options' => array(
+                    'help'    => 'dnd_magento_connector.export.isEnabled.help',
+                    'label'   => 'dnd_magento_connector.export.isEnabled.label',
+                )
+            )
         );
     }
 
