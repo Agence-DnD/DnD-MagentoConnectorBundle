@@ -1,0 +1,2 @@
+parameters:
+    dnd_magento_connector.reader.doctrine.product.class: DnD\Bundle\MagentoConnectorBundle\Reader\Doctrine\ORMProductReader
