@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36f8a0c6-6564-42d0-b090-6646fd3809da" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Writer/File/FileWriter.php" afterPath="$PROJECT_DIR$/Writer/File/FileWriter.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/config/batch_jobs.yml" afterPath="$PROJECT_DIR$/Resources/config/batch_jobs.yml" />
     </list>
     <ignored path="DnD-MagentoConnectorBundle.iws" />
@@ -105,7 +104,7 @@
       <file leaf-file-name="batch_jobs.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Resources/config/batch_jobs.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="68" selection-start="1215" selection-end="1215" vertical-scroll-proportion="0.41331804" vertical-offset="0" max-vertical-offset="1200">
+            <state line="34" column="72" selection-start="1746" selection-end="1746" vertical-scroll-proportion="0.46613088" vertical-offset="104" max-vertical-offset="1200">
               <folding />
             </state>
           </provider>
@@ -741,7 +740,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/config/batch_jobs.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="68" selection-start="1215" selection-end="1215" vertical-scroll-proportion="0.41331804" vertical-offset="0" max-vertical-offset="1200">
+        <state line="34" column="72" selection-start="1746" selection-end="1746" vertical-scroll-proportion="0.46613088" vertical-offset="104" max-vertical-offset="1200">
           <folding />
         </state>
       </provider>
