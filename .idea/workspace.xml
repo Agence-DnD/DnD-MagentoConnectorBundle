@@ -5,6 +5,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Reader/Doctrine/ORMProductReader.php" afterPath="$PROJECT_DIR$/Reader/Doctrine/ORMProductReader.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/translations/messages.en.yml" afterPath="$PROJECT_DIR$/Resources/translations/messages.en.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/translations/messages.fr.yml" afterPath="$PROJECT_DIR$/Resources/translations/messages.fr.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="DnD-MagentoConnectorBundle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,19 +28,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="messages.fr.yml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Resources/translations/messages.fr.yml">
+      <file leaf-file-name="CsvProductWriter.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Writer/File/CsvProductWriter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="24" selection-start="1528" selection-end="1528" vertical-scroll-proportion="0.6555683" vertical-offset="14" max-vertical-offset="930">
+            <state line="114" column="5" selection-start="2274" selection-end="2274" vertical-scroll-proportion="0.0" vertical-offset="1710" max-vertical-offset="3990">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CsvProductWriter.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Writer/File/CsvProductWriter.php">
+      <file leaf-file-name="ORMProductReader.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reader/Doctrine/ORMProductReader.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="5" selection-start="2274" selection-end="2274" vertical-scroll-proportion="-14.958333" vertical-offset="1321" max-vertical-offset="3960">
+            <state line="222" column="37" selection-start="4640" selection-end="4640" vertical-scroll-proportion="-4.4166665" vertical-offset="3074" max-vertical-offset="7470">
               <folding />
             </state>
           </provider>
@@ -48,7 +49,7 @@
       <file leaf-file-name="readers.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/config/readers.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="51" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+            <state line="18" column="51" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="360">
               <folding />
             </state>
           </provider>
@@ -57,7 +58,7 @@
       <file leaf-file-name="orm.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/config/storage_driver/doctrine/orm.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="75" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+            <state line="1" column="75" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="105">
               <folding />
             </state>
           </provider>
@@ -66,7 +67,16 @@
       <file leaf-file-name="messages.en.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/translations/messages.en.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="12" selection-start="2084" selection-end="2158" vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="930">
+            <state line="36" column="23" selection-start="1309" selection-end="1309" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="975">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="messages.fr.yml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Resources/translations/messages.fr.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="49" column="23" selection-start="1980" selection-end="1980" vertical-scroll-proportion="0.7700472" vertical-offset="82" max-vertical-offset="975">
               <folding />
             </state>
           </provider>
@@ -75,7 +85,7 @@
       <file leaf-file-name="composer.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/composer.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="16" selection-start="877" selection-end="877" vertical-scroll-proportion="0.0" vertical-offset="109" max-vertical-offset="705">
+            <state line="11" column="44" selection-start="461" selection-end="461" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="705">
               <folding />
             </state>
           </provider>
@@ -102,16 +112,7 @@
       <file leaf-file-name="AttributeProcessor.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Processor/AttributeProcessor.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1005">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="processors.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Resources/config/processors.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="4" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="255">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1050">
               <folding />
             </state>
           </provider>
@@ -347,7 +348,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2657082" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2683706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -355,11 +356,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="UnknownFeatures">
@@ -382,6 +383,13 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Resources/config/processors.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="4" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Resources/translations/messages.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="32" selection-start="644" selection-end="644" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="795">
@@ -391,9 +399,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Writer/File/CsvWriter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="277" column="44" selection-start="5852" selection-end="5852" vertical-scroll-proportion="0.0" vertical-offset="4155" max-vertical-offset="5940">
-          <folding />
-        </state>
+        <state line="277" column="44" selection-start="5852" selection-end="5852" vertical-scroll-proportion="0.0" vertical-offset="4155" max-vertical-offset="5940" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Reader/Doctrine/ORMProductReader.php">
@@ -405,9 +411,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DependencyInjection/DnDMagentoConnectorExtension.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="9" selection-start="1132" selection-end="1132" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="600">
-          <folding />
-        </state>
+        <state line="31" column="9" selection-start="1132" selection-end="1132" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="600" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/config/readers.yml">
@@ -468,9 +472,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Writer/File/CsvWriter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="254" column="47" selection-start="4927" selection-end="4927" vertical-scroll-proportion="0.0" vertical-offset="3810" max-vertical-offset="5910">
-          <folding />
-        </state>
+        <state line="254" column="47" selection-start="4927" selection-end="4927" vertical-scroll-proportion="0.0" vertical-offset="3810" max-vertical-offset="5910" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/translations/messages.en.yml">
@@ -524,9 +526,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Writer/File/CsvWriter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="270" column="9" selection-start="5762" selection-end="5762" vertical-scroll-proportion="0.0" vertical-offset="4050" max-vertical-offset="5910">
-          <folding />
-        </state>
+        <state line="270" column="9" selection-start="5762" selection-end="5762" vertical-scroll-proportion="0.0" vertical-offset="4050" max-vertical-offset="5910" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/translations/messages.en.yml">
@@ -639,13 +639,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="873" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="16" selection-start="877" selection-end="877" vertical-scroll-proportion="0.0" vertical-offset="109" max-vertical-offset="705">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="55" column="0" selection-start="1459" selection-end="1459" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
@@ -653,18 +646,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/config/processors.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="4" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Writer/File/CsvWriter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="277" column="44" selection-start="5852" selection-end="5852" vertical-scroll-proportion="0.0" vertical-offset="4155" max-vertical-offset="5940">
-          <folding />
-        </state>
+        <state line="277" column="44" selection-start="5852" selection-end="5852" vertical-scroll-proportion="0.0" vertical-offset="4155" max-vertical-offset="5940" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Processor/AttributeProcessor.php">
@@ -676,9 +660,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DependencyInjection/DnDMagentoConnectorExtension.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="1141" selection-end="1141" vertical-scroll-proportion="-19.375" vertical-offset="0" max-vertical-offset="555">
-          <folding />
-        </state>
+        <state line="34" column="0" selection-start="1141" selection-end="1141" vertical-scroll-proportion="-19.375" vertical-offset="0" max-vertical-offset="555" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/config/batch_jobs.yml">
@@ -704,28 +686,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Writer/File/CsvProductWriter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="5" selection-start="2274" selection-end="2274" vertical-scroll-proportion="-14.958333" vertical-offset="1321" max-vertical-offset="3960">
+        <state line="114" column="5" selection-start="2274" selection-end="2274" vertical-scroll-proportion="0.0" vertical-offset="1710" max-vertical-offset="3990">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/config/processors.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="4" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="44" selection-start="461" selection-end="461" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="705">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Reader/Doctrine/ORMProductReader.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="296" column="13" selection-start="7389" selection-end="7389" vertical-scroll-proportion="-23.708334" vertical-offset="3721" max-vertical-offset="6360">
+        <state line="222" column="37" selection-start="4640" selection-end="4640" vertical-scroll-proportion="-4.4166665" vertical-offset="3074" max-vertical-offset="7470">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/translations/messages.en.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="12" selection-start="2084" selection-end="2158" vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="930">
+        <state line="36" column="23" selection-start="1309" selection-end="1309" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="975">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/translations/messages.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="24" selection-start="1528" selection-end="1528" vertical-scroll-proportion="0.6555683" vertical-offset="14" max-vertical-offset="930">
+        <state line="49" column="23" selection-start="1980" selection-end="1980" vertical-scroll-proportion="0.7700472" vertical-offset="82" max-vertical-offset="975">
           <folding />
         </state>
       </provider>

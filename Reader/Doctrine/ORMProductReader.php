@@ -107,6 +107,11 @@ class ORMProductReader extends AbstractConfigurableStepElement implements Produc
     protected $isEnabled = true;
 
     /**
+     * @var boolean
+     */
+    protected $isComplete = true;
+
+    /**
      * get exportFrom
      *
      * @return string exportFrom
@@ -174,6 +179,30 @@ class ORMProductReader extends AbstractConfigurableStepElement implements Produc
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    /**
+     * get isComplete
+     *
+     * @return boolean isComplete
+     */
+    public function getIsComplete()
+    {
+        return $this->isComplete;
+    }
+
+    /**
+     * Set isComplete
+     *
+     * @param string isComplete $isComplete
+     *
+     * @return AbstractProcessor
+     */
+    public function setIsComplete($isComplete)
+    {
+        $this->isComplete = $isComplete;
 
         return $this;
     }
@@ -294,6 +323,14 @@ class ORMProductReader extends AbstractConfigurableStepElement implements Produc
                     'help'    => 'dnd_magento_connector.export.isEnabled.help',
                     'label'   => 'dnd_magento_connector.export.isEnabled.label',
                 )
+            ),
+            'isComplete' => array(
+                'type'    => 'switch',
+                'required' => false,
+                'options' => array(
+                    'help'    => 'dnd_magento_connector.export.isComplete.help',
+                    'label'   => 'dnd_magento_connector.export.isComplete.label',
+                )
             )
         );
     }
@@ -361,8 +398,7 @@ class ORMProductReader extends AbstractConfigurableStepElement implements Produc
             $this->completenessManager->generateMissingForChannel($this->channel);
         }
 
-        $this->query = $this->repository
-            ->buildByChannelAndCompleteness($this->channel);
+        $this->query = $this->DnDBuildByChannelAndCompleteness($this->channel, $this->getIsComplete());
 
         $rootAlias = current($this->query->getRootAliases());
         $rootIdExpr = sprintf('%s.id', $rootAlias);
@@ -378,11 +414,49 @@ class ORMProductReader extends AbstractConfigurableStepElement implements Produc
                     $this->query->expr()->gte($from->getAlias() . '.updated', ':updated')
                 )
             )
-            ->setParameter(':updated', $this->getDateFilter())
+            ->setParameter('updated', $this->getDateFilter())
+            ->setParameter('enabled', $this->getIsEnabled())
             ->groupBy($rootIdExpr);
         $results = $this->query->getQuery()->getArrayResult();
 
         return array_keys($results);
+    }
+
+    /**
+     * Get product collection by channel and completness
+     */
+    protected function DnDBuildByChannelAndCompleteness($channel, $isComplete){
+        $scope = $channel->getCode();
+        $qb = $this->repository->buildByScope($scope);
+        $rootAlias = $qb->getRootAlias();
+
+        $complete = ($isComplete) ? $qb->expr()->eq('pCompleteness.ratio', '100') : $qb->expr()->lt('pCompleteness.ratio', '100');
+        $expression =
+            'pCompleteness.product = '.$rootAlias.' AND '.
+            $complete.' AND '.
+            $qb->expr()->eq('pCompleteness.channel', $channel->getId());
+
+        $rootEntity          = current($qb->getRootEntities());
+        $completenessMapping = $this->entityManager->getClassMetadata($rootEntity)
+            ->getAssociationMapping('completenesses');
+        $completenessClass   = $completenessMapping['targetEntity'];
+        $qb->innerJoin(
+            $completenessClass,
+            'pCompleteness',
+            'WITH',
+            $expression
+        );
+
+        $treeId = $channel->getCategory()->getId();
+        $expression = $qb->expr()->eq('pCategory.root', $treeId);
+        $qb->innerJoin(
+            $rootAlias.'.categories',
+            'pCategory',
+            'WITH',
+            $expression
+        );
+
+        return $qb;
     }
 
     /**
