@@ -1,68 +1,66 @@
 DnD-MagentoConnectorBundle
 ==========================
 
-[English Version](#English)
+Magento Connector for Akeneo PIM
 
-Connecteur Magento pour le PIM Akeneo
+This connector allows you exporting data from the PIM to another server by a SFTP connection (FTP export is not already effective, see [roadmap](#roadmap))
 
-Ce connecteur vous permettra d'exporter vos données du PIM vers un autre serveur via une connexion SFTP (L'export par le biais du FTP n'est pas encore mis en place, voir [roadmap](#Roadmap))
+You will need the following informations :
 
-Vous aurez donc besoin des informations suivantes :
-
-- Hôte
+- Host
 - Port
-- Nom d'utilisateur
-- Mot de passe
+- Username
+- Password
 
-Attention : la partie qui interprète les fichiers côté Magento (ou autres solutions) n'est pas présente sur ce repository
+Warning : the part which read the files in Magento system is not present on this repository (see [this module](https://github.com/Agence-DnD/DnD-PimConnector))
 
-## Pré-requis
+## Requirements
 
 - php5
 - php5-ssh2
 - Akeneo PIM 1.2.x stable
 
-## Instructions d'installation
+## Installation instructions
 
-Assurer vous que votre serveur possède la librairie ssh2 (voir http://php.net/manual/fr/ssh2.installation.php)
+Be sur that the server has ssh2 library installed (see [manual](http://php.net/manual/fr/ssh2.installation.php))
 
-## Installation du connecteur sur le PIM de Akeneo
+## Connector installation on Akeneo PIM
 
-Si ce n'est pas déjà fait, installer le PIM de Akeneo (voir [cette documentation](https://github.com/akeneo/pim-community-standard))
+If it's not already done, install Akeneo PIM (see [this documentation](https://github.com/akeneo/pim-community-standard))
 
-Récuperer composer (en ligne de commande) :
+Get composer (with command line) :
 
     $ cd /my/pim/installation/dir
     $ curl -sS https://getcomposer.org/installer | php
 
-Installer le DnD-MagentoConnectorBundle avec composer :
+Install DnD-MagentoConnectorBundle with composer :
 
-Dans votre composer.json, ajouter le code suivant :
+In your composer.json, add the following code :
 
-- Dans repositories :
+- In repositories :
 
     {
         "type": "vcs",
         "url": "http://github.com/Agence-DnD/DnD-MagentoConnectorBundle.git"
     }
 
-- Dans require :
+- In require :
 
     "agencednd/magento-connector-bundle":"1.2"
 
-Entrer ensuite la ligne de commande suivante :
+Next, enter the following command line :
 
     $ php composer.phar update
 
-Activer le bundle dans le fichier 'app/AppKernel.php', dans la fonction 'registerBundles', avant la ligne 'return $bundles' :
+Enable the bundle in 'app/AppKernel.php' file, in the 'registerBundles' function, before the line 'return $bundles' :
 
     $bundles[] = new DnD\MagentoConnectorBundle\DnDMagentoConnectorBundle();
 
 ## Configuration
 
-Aller dans Diffuser > Profil d'export puis créer votre export de type DnD Magento Connector Bundle.
+Go to Spread > Export and then create your DnDMagentoConnectorBundle export type.
 
-Il est recommandé de saisir un code clair et précis, voici un exemple de ce que vous pourriez mettre :
+It is recommend to create exports with an explicit code, below an example of what you can enter :
 
 companyname_environment_categories_export
 companyname_environment_family_export
@@ -70,62 +68,61 @@ companyname_environment_attribute_export
 companyname_environment_attribute_option_export
 companyname_environment_product_export
 
-Ci-dessus, companyname correspond au nom de votre société et environment à l'environnement sur lequel vous effectuez vos exports (devel, preprod, prod).
+Above, companyname match with the name of your company and environment is the environment on which you make your exports (devel, preprod, prod).
 
-- Export des produits :
+- Products export :
 
-    - Choix du canal
-    - Choix de la dernière date de modification des produits (si cette dernière n'est pas entrée et que le profil n'a jamais été exécuté, tous les produits sont exportés sinon cela tous les produits modifiés depuis la dernière exécution du profil)
-    - ID Export Produit (ce dernier correspond au chiffre visible dans l'url sur laquelle vous vous trouvez "/spread/export/ID")
-    - Statut des produits (activés / désactivés)
-    - Complétude des produits (complets / incomplets)
-    - Chemin du fichier enregistré sur le serveur du PIM
-    - Hôte de votre serveur distant (IP publique)
-    - Port de votre serveur distant (22 pour une connexion SFTP)
-    - Utilisateur de votre serveur distant
-    - Mot de passe de l'utilisateur de votre serveur distant
-    - Chemin du fichier enregistré sur votre serveur distant (depuis la raçine accessible par votre utilisateur)
-    - Délimiteur du fichier CSV
-    - Caractère d'encadrement du fichier CSV
-    - Fichier CSV avec / sans en-tête
-    - Chemin des images enregistrées sur votre serveur distant (depuis la raçine accessible par votre utilisateur)
-    - Exporter les images (oui / non), si vous choisissez non, les colonnes des médias ne seront pas présentes dans le fichier CSV et les fichiers ne seront pas transférés
-    - Données à exporter (Toutes les données / Toutes les données sauf celles de type prix / Uniquement les données de type prix)
+    - Channel choice
+    - Last products modification date (if empty and the profil never been executed, all products are exported otherwise it export all products since the last profil execution datetime)
+    - Export Product ID (number visible in the current url "/spread/export/ID")
+    - Products status (enable / disable)
+    - Products completness (completes / incompletes)
+    - File path on Akeneo PIM server
+    - Remote server host (public IP)
+    - Remote server port (22 for SFTP connection)
+    - Remote server username
+    - Remote server password
+    - Remote server file path (from the user root access)
+    - CSV file delimiter
+    - CSV file delimiter enclosure
+    - CSV file with / without header
+    - Remote server images file path (from the user root access)
+    - Export images (yes / no), if you choose no, media columns will not be present in your CSV file and your images will not be transfered
+    - Data to export (All data / All data without prices / Only prices)
 
-Aperçu d'un export produit :
+Product export overview :
 ![products-export](http://img.dnd.fr/uploads/pim-screen1.png)
 
-- Autres exports :
+- Other exports :
 
-    - Chemin du fichier enregistré sur le serveur du PIM
-    - Hôte de votre serveur distant (IP publique)
-    - Port de votre serveur distant (22 pour une connexion SFTP)
-    - Utilisateur de votre serveur distant
-    - Mot de passe de l'utilisateur de votre serveur distant
-    - Chemin du fichier enregistré sur votre serveur distant (depuis la raçine accessible par votre utilisateur)
-    - Délimiteur du fichier CSV
-    - Caractère d'encadrement du fichier CSV
-    - Fichier CSV avec / sans en-tête
+    - File path on Akeneo PIM server
+    - Remote server host (public IP)
+    - Remote server port (22 for SFTP connection)
+    - Remote server username
+    - Remote server password
+    - Remote server file path (from the user root access)
+    - CSV file delimiter
+    - CSV file delimiter enclosure
+    - CSV file with / without header
 
-Aperçu d'un export :
+Other exports overview :
 ![other-export](http://img.dnd.fr/uploads/pim-screen2.png)
 
 ## CRONJOB
 
-Pour mettre en place un cronjob qui permet d'automatiser les exports (ici un exemple pour tous les matins à 4 heures) :
+To set up a cronjob which allow you to computerize exports (below an example for everyday at 4am) :
 
-0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_categories_export --env=prod
-0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_family_export --env=prod
-0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_attribute_export --env=prod
-0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_attribute_option_export --env=prod
-0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_product_export --env=prod
+    $ 0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_categories_export --env=prod
+    $ 0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_family_export --env=prod
+    $ 0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_attribute_export --env=prod
+    $ 0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_attribute_option_export --env=prod
+    $ 0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_product_export --env=prod
 
 ## Roadmap
 
-- Implémentation de l'export des fichiers par le biais du protocole FTP
-- Modification du type des champs mot de passe (afin qu'ils ne soient pas affichés)
-- Modification de l'export des produits afin de pouvoir exporter les produits activés et désactivés
-- Modification de l'export des produits afin de pouvoir exporter les produits complets et non complets
-- Suppression du champ ID export produit afin qu'il soit récupéré dynamiquement
-
-## English
+- Export files with FTP protocol
+- Update password fields type (to hide their value)
+- Export enabled and disabled products (actually enabled or disabled)
+- Export complete and incomplete products (actually complete or incomplete)
+- Remove ID product export and get it dynamically
+- Choose root categories to export
