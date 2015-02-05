@@ -125,4 +125,3 @@ Pour mettre en place un cronjob qui permet d'automatiser les exports (ici un exe
 - Modification de l'export des produits afin de pouvoir exporter les produits activés et désactivés
 - Modification de l'export des produits afin de pouvoir exporter les produits complets et non complets
 - Suppression du champ ID export produit afin qu'il soit récupéré dynamiquement
-- Choisir les catégories raçine à exporter

@@ -125,4 +125,3 @@ To set up a cronjob which allow you to computerize exports (below an example for
 - Export enabled and disabled products (actually enabled or disabled)
 - Export complete and incomplete products (actually complete or incomplete)
 - Remove ID product export and get it dynamically
-- Choose root categories to export
