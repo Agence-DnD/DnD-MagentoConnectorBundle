@@ -12,7 +12,8 @@ You will need the following informations :
 - Username
 - Password
 
-Warning : the part which read the files in Magento system is not present on this repository (see [this module](https://github.com/Agence-DnD/DnD-PimConnector))
+## Magento side : PIMGento extension is required
+The part which read the files in Magento system works with PIMGento (a dedicateed Magento extension for Akeneo), not present on this repository (GoTo [PIMGento  Extension](https://github.com/Agence-DnD/PimGento ))
 
 ## Requirements
 
