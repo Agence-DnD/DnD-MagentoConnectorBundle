@@ -28,7 +28,7 @@
     ],
     "require": {
         "ext-ssh2": "*",
-        "akeneo/pim-community-dev": "1.2.*@stable"
+        "akeneo/pim-community-dev": "~1.2@stable"
     },
     "autoload": {
         "psr-0": { "DnD\\Bundle\\MagentoConnectorBundle\\": "" }
