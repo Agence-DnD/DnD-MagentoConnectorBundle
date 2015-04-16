@@ -2,6 +2,7 @@
 
 namespace DnD\Bundle\MagentoConnectorBundle\Reader\Doctrine;
 
+use Pim\Bundle\CatalogBundle\Version;
 use Akeneo\Bundle\BatchBundle\Entity\StepExecution;
 use Akeneo\Bundle\BatchBundle\Item\AbstractConfigurableStepElement;
 use Doctrine\ORM\AbstractQuery;
@@ -426,34 +427,42 @@ class ORMProductReader extends AbstractConfigurableStepElement implements Produc
      */
     protected function DnDBuildByChannelAndCompleteness($channel, $isComplete){
         $scope = $channel->getCode();
-        $qb = $this->repository->buildByScope($scope);
-        $rootAlias = $qb->getRootAlias();
 
-        $complete = ($isComplete) ? $qb->expr()->eq('pCompleteness.ratio', '100') : $qb->expr()->lt('pCompleteness.ratio', '100');
-        $expression =
-            'pCompleteness.product = '.$rootAlias.' AND '.
-            $complete.' AND '.
-            $qb->expr()->eq('pCompleteness.channel', $channel->getId());
+        if (version_compare(Version::VERSION, '1.3.0', '<')) {
+            $qb = $this->repository->buildByScope($scope);
 
-        $rootEntity          = current($qb->getRootEntities());
-        $completenessMapping = $this->entityManager->getClassMetadata($rootEntity)
-            ->getAssociationMapping('completenesses');
-        $completenessClass   = $completenessMapping['targetEntity'];
-        $qb->innerJoin(
-            $completenessClass,
-            'pCompleteness',
-            'WITH',
-            $expression
-        );
+            $rootAlias = $qb->getRootAlias();
 
-        $treeId = $channel->getCategory()->getId();
-        $expression = $qb->expr()->eq('pCategory.root', $treeId);
-        $qb->innerJoin(
-            $rootAlias.'.categories',
-            'pCategory',
-            'WITH',
-            $expression
-        );
+            $complete = ($isComplete) ? $qb->expr()->eq('pCompleteness.ratio', '100') : $qb->expr()->lt('pCompleteness.ratio', '100');
+            $expression =
+                'pCompleteness.product = '.$rootAlias.' AND '.
+                $complete.' AND '.
+                $qb->expr()->eq('pCompleteness.channel', $channel->getId());
+
+            $rootEntity          = current($qb->getRootEntities());
+            $completenessMapping = $this->entityManager->getClassMetadata($rootEntity)
+                ->getAssociationMapping('completenesses');
+            $completenessClass   = $completenessMapping['targetEntity'];
+            $qb->innerJoin(
+                $completenessClass,
+                'pCompleteness',
+                'WITH',
+                $expression
+            );
+
+            $treeId = $channel->getCategory()->getId();
+            $expression = $qb->expr()->eq('pCategory.root', $treeId);
+            $qb->innerJoin(
+                $rootAlias.'.categories',
+                'pCategory',
+                'WITH',
+                $expression
+            );
+        } else {
+            $qb = $this->repository->buildByChannelAndCompleteness($channel);
+            // TODO Fix with isComplete at false
+        }
+
 
         return $qb;
     }

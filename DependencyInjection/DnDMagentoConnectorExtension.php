@@ -25,7 +25,11 @@ class DnDMagentoConnectorExtension extends Extension
         $loader->load('readers.yml');
         $loader->load('processors.yml');
         $loader->load('writers.yml');
-        
+
+        if (!version_compare(Version::VERSION, '1.3.0', '<')) {
+            $loader->load('services_aliases_1_3.yml');
+        }
+
         $storageConfig = sprintf('storage_driver/%s.yml', $this->getStorageDriver($container));
         if (file_exists(__DIR__ . '/../Resources/config/' . $storageConfig)) {
             $loader->load($storageConfig);
