@@ -13,17 +13,17 @@ You will need the following informations :
 - Password
 
 ## Magento side : PIMGento extension is required
-The part which read the files in Magento system works with PIMGento (a dedicateed Magento extension for Akeneo), not present on this repository (GoTo [PIMGento  Extension](https://github.com/Agence-DnD/PimGento ))
+The part which read the files in Magento system works with PIMGento (a dedicateed Magento extension for Akeneo), not present on this repository (GoTo [PIMGento  Extension] for more infomations (https://github.com/Agence-DnD/PimGento ))
 
 ## Requirements
 
 - php5
 - php5-ssh2
-- Akeneo PIM 1.2.x stable
+- Akeneo PIM 1.3.x stable
 
 ## Installation instructions
 
-Be sur that the server has ssh2 library installed (see [manual](http://php.net/manual/fr/ssh2.installation.php))
+Be sure that your server has SSH2 library installed (see [manual](http://php.net/manual/fr/ssh2.installation.php))
 
 ## Connector installation on Akeneo PIM
 
@@ -51,7 +51,7 @@ In your composer.json, add the following code :
 
 Next, enter the following command line :
 
-    $ php composer.phar update
+    $php composer.phar update
 
 Enable the bundle in 'app/AppKernel.php' file, in the 'registerBundles' function, before the line 'return $bundles' :
 
@@ -126,3 +126,7 @@ To set up a cronjob which allow you to computerize exports (below an example for
 - Export enabled and disabled products (actually enabled or disabled)
 - Export complete and incomplete products (actually complete or incomplete)
 - Remove ID product export and get it dynamically
+
+## About us
+
+Founded by lovers of innovation and design, [Agence Dn'D] (http://www.dnd.fr) assists companies for 11 years in the creation and development of customized digital (open source) solutions for web and E-commerce.
