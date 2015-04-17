@@ -55,7 +55,7 @@ Next, enter the following command line :
 
 Enable the bundle in 'app/AppKernel.php' file, in the 'registerBundles' function, before the line 'return $bundles' :
 
-    $bundles[] = new DnD\MagentoConnectorBundle\DnDMagentoConnectorBundle();
+    $bundles[] = new DnD\Bundle\MagentoConnectorBundle\DnDMagentoConnectorBundle();
 
 ## Configuration
 
