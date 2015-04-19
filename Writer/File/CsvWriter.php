@@ -152,6 +152,16 @@ class CsvWriter extends BaseCsvWriter
         $sftpConnection = new SFTPConnection($this->getHost(), $this->getPort());
         $sftpConnection->login($this->getUsername(), $this->getPassword());
         $sftpConnection->uploadFile($this->getFilePath(), $this->getRemoteFilePath());
+
+        $this->stepExecution->addSummaryInfo(
+            "dnd_magento_connector.export.remote_file_created",
+            sprintf(
+                "sftp://%s:%s%s",
+                $this->getHost(),
+                $this->getPort(),
+                $this->getRemoteFilePath()
+            )
+        );
     }
 
     /**

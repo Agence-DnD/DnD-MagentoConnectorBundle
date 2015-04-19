@@ -68,17 +68,19 @@ class SFTPConnection
 		$stream = @fopen("ssh2.sftp://". $sftp . $remoteFile, 'w');
 
         if (!$stream) {
-            throw new \Exception("Could not open file: $remoteFile");
+            throw new \Exception("Could not open remote file for writing: $remoteFile");
         }
 
         $fileContent = @file_get_contents($localFile);
 
         if ($fileContent === false) {
-            throw new \Exception("Could not open local file: $localFile.");
+            throw new \Exception("Could not open local file for reading: $localFile.");
         }
+        echo "DEBUG fileocntent:";
+        var_dump($fileContent);
 
         if (@fwrite($stream, $fileContent) === false) {
-            throw new \Exception("Could not send data from file: $localFile.");
+            throw new \Exception("Could not send data from local file $localFile to remote file $remoteFile.");
         }
 
         @fclose($stream);
