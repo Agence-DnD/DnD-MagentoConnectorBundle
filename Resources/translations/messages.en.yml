@@ -36,10 +36,10 @@ dnd_magento_connector:
             help: SFTP connection password
         remoteFilePath:
             label: Remote File Path
-            help: Remote File Path (from the root of your SFTP user)
+            help: Remote File Path (example: /home/sftpuser/my_file.csv)
         imageFolderPath:
             label: Image Folder Path
-            help: Image Folder Path (from the root of your SFTP user)
+            help: Image Folder Path (exemple: /home/sftpuser/images/
         exportImages:
             label: Export Images
             help: Do we also export the images of the products
