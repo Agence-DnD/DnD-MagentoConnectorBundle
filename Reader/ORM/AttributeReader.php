@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Pim\Bundle\BaseConnectorBundle\Reader\Doctrine\Reader;
 
 /**
+ * Attribute reader class to exclude configured attributes
  *
  * @author    DnD Mimosa <mimosa@dnd.fr>
  * @copyright Agence Dn'D (http://www.dnd.fr)

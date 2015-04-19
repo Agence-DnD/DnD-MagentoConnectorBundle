@@ -20,15 +20,11 @@
         {
             "type": "vcs",
             "url": "https://github.com/akeneo/platform.git"
-        },
-        {
-            "type": "vcs",
-            "url": "http://github.com/Agence-DnD/DnD-MagentoConnectorBundle.git"
         }
     ],
     "require": {
         "ext-ssh2": "*",
-        "akeneo/pim-community-dev": "1.2* >=1.3.8"
+        "akeneo/pim-community-dev": "~1.2, <1.3.0 | >=1.3.8"
     },
     "autoload": {
         "psr-0": { "DnD\\Bundle\\MagentoConnectorBundle\\": "" }
@@ -36,6 +32,6 @@
     "config": {
         "bin-dir": "bin"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "target-dir": "DnD/Bundle/MagentoConnectorBundle"
 }

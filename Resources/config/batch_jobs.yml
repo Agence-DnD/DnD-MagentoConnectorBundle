@@ -40,7 +40,7 @@ connector:
                 export:
                     title:     dnd_magento_connector.jobs.dnd_csv_attribute_option_export.export.title
                     services:
-                        reader:    dnd_magento_connector.reader.orm.attribute_option
+                        reader:    pim_base_connector.reader.orm.attribute_option
                         processor: pim_base_connector.processor.csv_serializer.homogeneous
                         writer:    dnd_magento_connector.writer.file
         dnd_csv_association_type_export:
