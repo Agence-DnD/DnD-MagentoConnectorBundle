@@ -39,15 +39,16 @@ Install DnD-MagentoConnectorBundle with composer :
 In your composer.json, add the following code :
 
 - In `repositories` :
-
+```
     {
         "type": "vcs",
         "url": "http://github.com/Agence-DnD/DnD-MagentoConnectorBundle.git"
     }
-
+```
 - In `require` :
-
+```
     "agencednd/magento-connector-bundle":"1.2"
+```
 
 Next, enter the following command line :
 
