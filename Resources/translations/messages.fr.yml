@@ -59,8 +59,8 @@ dnd_magento_connector:
             label: Complétude des produits
             help: Yes pour complet / No pour non complet
         excludedCategories:
-            label: Catégories raçine exclues
-            help: Code des catégories raçine à exclure (séparés par des virgules, ses enfants seront également exclus)
+            label: Catégories exclues
+            help: Code des catégories à exclure (séparés par des virgules, ses enfants seront également exclus)
         excludedAttributes:
             label: Attributs exclus
             help: Code des attributs à exclure (séparés par des virgules)

@@ -59,8 +59,8 @@ dnd_magento_connector:
             label: Products completness
             help: Yes for complete / No for uncomplete
         excludedCategories:
-            label: Excluded root categories
-            help: Root categories codes to exclude (separated by comas, it will also exclude its children)
+            label: Excluded categories
+            help: Categories codes to exclude (separated by comas, it will also exclude its children)
         excludedAttributes:
             label: Excluded attributes
             help: Attributes codes to exclude (separated by comas)
