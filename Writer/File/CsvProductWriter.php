@@ -2,28 +2,33 @@
 
 namespace DnD\Bundle\MagentoConnectorBundle\Writer\File;
 
+use DnD\Bundle\MagentoConnectorBundle\Helper\SFTPConnection;
+use Pim\Bundle\BaseConnectorBundle\Validator\Constraints\Channel;
 use Pim\Bundle\CatalogBundle\Manager\MediaManager;
 use Pim\Bundle\CatalogBundle\Model\AbstractProductMedia;
-use DnD\Bundle\MagentoConnectorBundle\Helper\SFTPConnection;
+use Pim\Bundle\CatalogBundle\Repository\AttributeRepositoryInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Pim\Bundle\BaseConnectorBundle\Validator\Constraints\Channel;
-use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
 
 /**
+ * Specific Product Writer for Dnd Magento Module purpose
  *
  * @author    DnD Mimosa <mimosa@dnd.fr>
- * @copyright Agence Dn'D (http://www.dnd.fr)
+ * @copyright 2015 Agence Dn'D (http://www.dnd.fr)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
- 
 class CsvProductWriter extends CsvWriter
 {
     /**
-     * @param MediaManager $mediaManager
+     * @var AttributeRepositoryInterface
+     */
+    protected $attributeRepository;
+
+    /**
+     * @var MediaManager
      */
     protected $mediaManager;
 
-     /**
+    /**
      * @var string
      */
     protected $imageFolderPath;
@@ -47,23 +52,20 @@ class CsvProductWriter extends CsvWriter
     protected $channel;
 
     /**
-     * @var ChannelManager
-     */
-    protected $channelManager;
-
-    /**
      * @var array
      */
     protected $fixedDatas = array("family", "groups", "categories", "RELATED-groups", "RELATED-products");
 
     /**
-     * @param MediaManager $mediaManager
+     * @param AttributeRepositoryInterface $attributeRepository
+     * @param MediaManager                 $mediaManager
      */
-    public function __construct(MediaManager $mediaManager, $entityManager, ChannelManager $channelManager)
-    {
-        $this->mediaManager = $mediaManager;
-        $this->entityManager = $entityManager;
-        $this->channelManager = $channelManager;
+    public function __construct(
+        AttributeRepositoryInterface $attributeRepository,
+        MediaManager $mediaManager
+    ) {
+        $this->attributeRepository = $attributeRepository;
+        $this->mediaManager        = $mediaManager;
     }
 
     /**
@@ -158,44 +160,11 @@ class CsvProductWriter extends CsvWriter
     }
 
     /**
+     * Override to copy media to sftp server
+     *
      * {@inheritdoc}
      */
-    public function write(array $items)
-    {
-        $products = [];
-
-        if (!is_dir(dirname($this->getPath()))) {
-            mkdir(dirname($this->getPath()), 0777, true);
-        }
-
-        foreach ($items as $item) {
-            $item['product'] = $this->getProductPricesOnly($item['product']);
-            $item['product'] = $this->formatMetricsColumns($item['product']);
-            $products[] = ($this->getExportImages()) ? $item['product'] : $this->removeMediaColumns($item['product']);
-            if($this->getExportImages()){
-                foreach ($item['media'] as $media) {
-                    if ($media) {
-                        $this->sendMedia($media);
-                    }
-                }
-            }
-        }
-
-        $this->items = array_merge($this->items, $products);
-        $sftpConnection = new SFTPConnection($this->getHost(), $this->getPort());
-        $sftpConnection->login($this->getUsername(), $this->getPassword());
-        if(file_exists($this->getFilePath())){
-	        $sftpConnection->uploadFile($this->getFilePath(), $this->getRemoteFilePath());
-        }
-    }
-
-    /**
-     * @param array|AbstractProductMedia $media
-     * //TODO Add a "/" after the image folder path
-     *
-     * @return void
-     */
-    public function sendMedia($media)
+    protected function copyMedia($media)
     {
         $filePath = null;
         $exportPath = null;
@@ -204,7 +173,8 @@ class CsvProductWriter extends CsvWriter
             $filePath = $media['filePath'];
             $exportPath = $media['exportPath'];
         } else {
-            if ('' !== $media->getFileName()) {
+            $fileName = $media->getFilename();
+            if (!empty($fileName)) {
                 $filePath = $media->getFilePath();
             }
             $exportPath = $this->mediaManager->getExportPath($media);
@@ -223,37 +193,39 @@ class CsvProductWriter extends CsvWriter
     }
 
     /**
-     * @param $item array
      * Get only prices or all data without prices
+     *
+     * @param array $item
+     *
      * @return array
      */
-    protected function getProductPricesOnly($item)
+    protected function getProductPricesOnly(array $item)
     {
-        if($this->getExportPriceOnly() == 'all'){
+        if ($this->getExportPriceOnly() == 'all') {
             return $item;
         }
-        $attributeEntity = $this->entityManager->getRepository('Pim\Bundle\CatalogBundle\Entity\Attribute');
-        $attributes      = $attributeEntity->getNonIdentifierAttributes();
-        foreach($attributes as $attribute){
-            if($this->getExportPriceOnly() == 'onlyPrices'){
-                if($attribute->getBackendType() != 'prices'){
+        $attributes      = $this->attributeRepository->getNonIdentifierAttributes();
+
+        foreach ($attributes as $attribute) {
+            if ($this->getExportPriceOnly() == 'onlyPrices') {
+                if ($attribute->getBackendType() != 'prices') {
                     $attributesToRemove = preg_grep('/^' . $attribute->getCode() . 'D*/', array_keys($item));
-                    foreach($attributesToRemove as $attributeToRemove){
+                    foreach ($attributesToRemove as $attributeToRemove) {
                         unset($item[$attributeToRemove]);
                     }
                 }
-            }elseif($this->getExportPriceOnly() == 'withoutPrices'){
-                if($attribute->getBackendType() == 'prices'){
+            } elseif ($this->getExportPriceOnly() == 'withoutPrices') {
+                if ($attribute->getBackendType() == 'prices') {
                     $attributesToRemove = preg_grep('/^' . $attribute->getCode() . 'D*/', array_keys($item));
-                    foreach($attributesToRemove as $attributeToRemove){
+                    foreach ($attributesToRemove as $attributeToRemove) {
                         unset($item[$attributeToRemove]);
                     }
                 }
             }
         }
 
-        if($this->getExportPriceOnly()  == 'onlyPrices'){
-            foreach($this->fixedDatas as $fixedData){
+        if ($this->getExportPriceOnly()  == 'onlyPrices') {
+            foreach ($this->fixedDatas as $fixedData) {
                 unset($item[$fixedData]);
             }
         }
@@ -262,81 +234,87 @@ class CsvProductWriter extends CsvWriter
     }
 
     /**
-     * @param array $item
      * Add channel code to metric attributes header columns
+     *
+     * @param array $item
+     *
      * @return array
      */
-    protected function formatMetricsColumns($item){
-        $attributeEntity = $this->entityManager->getRepository('Pim\Bundle\CatalogBundle\Entity\Attribute');
-        $attributes      = $attributeEntity->getNonIdentifierAttributes();
-        foreach($attributes as $attribute){
-            if($attribute->getBackendType() == 'metric'){
-                if(array_key_exists($attribute->getCode(), $item)){
+    protected function formatMetricsColumns($item)
+    {
+        $attributes      = $this->attributeRepository->getNonIdentifierAttributes();
+
+        foreach ($attributes as $attribute) {
+            if ('metric' === $attribute->getBackendType()) {
+                if (array_key_exists($attribute->getCode(), $item)) {
                     $item[$attribute->getCode() . '-' . $this->getChannel()] = $item[$attribute->getCode()];
                     unset($item[$attribute->getCode()]);
                 }
             }
         }
+
         return $item;
     }
 
 
     /**
-     * @param array $item
      * Remove all column of attributes with type media
+     *
+     * @param array $item
+     *
      * @return array
      */
     protected function removeMediaColumns($item)
     {
-        $attributeEntity      = $this->entityManager->getRepository('Pim\Bundle\CatalogBundle\Entity\Attribute');
+        $attributeEntity = $this->entityManager->getRepository('Pim\Bundle\CatalogBundle\Entity\Attribute');
         $mediaAttributesCodes = $attributeEntity->findMediaAttributeCodes();
-        foreach($mediaAttributesCodes as $mediaAttributesCode){
-            if(array_key_exists($mediaAttributesCode, $item)){
+
+        foreach ($mediaAttributesCodes as $mediaAttributesCode) {
+            if (array_key_exists($mediaAttributesCode, $item)) {
                 unset($item[$mediaAttributesCode]);
             }
         }
+
         return $item;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function getConfigurationFields()
     {
-        return
-            array_merge(
-                parent::getConfigurationFields(),
-                array(
-                    'imageFolderPath' => array(
-                        'options' => array(
-                            'label'    => 'dnd_magento_connector.export.imageFolderPath.label',
-                            'help'     => 'dnd_magento_connector.export.imageFolderPath.help',
-                            'required' => false
-                        )
-                    ),
-                    'exportImages' => array(
-                        'type'    => 'switch',
-                        'options' => array(
-                            'help'    => 'dnd_magento_connector.export.exportImages.help',
-                            'label'   => 'dnd_magento_connector.export.exportImages.label',
-                        )
-                    ),
-                    'exportPriceOnly' => array(
-                        'type'    => 'choice',
-                        'options' => array(
-                            'choices'  => array(
-                                'all' 			=> 'Tout exporter',
-                                'withoutPrices' => 'Tout exporter sauf les prix',
-                                'onlyPrices'	=> 'Exporter les prix uniquement'
-                            ),
-                            'required' => true,
-                            'select2'  => true,
-                            'label'    => 'dnd_magento_connector.export.exportPriceOnly.label',
-                            'help'     => 'dnd_magento_connector.export.exportPriceOnly.help'
-                        )
-                    )
-                )
-            );
+        return array_merge(
+            parent::getConfigurationFields(),
+            [
+                'imageFolderPath' => [
+                    'options' => [
+                        'label'    => 'dnd_magento_connector.export.imageFolderPath.label',
+                        'help'     => 'dnd_magento_connector.export.imageFolderPath.help',
+                        'required' => false
+                    ]
+                ],
+                'exportImages' => [
+                    'type'    => 'switch',
+                    'options' => [
+                        'help'    => 'dnd_magento_connector.export.exportImages.help',
+                        'label'   => 'dnd_magento_connector.export.exportImages.label',
+                    ]
+                ],
+                'exportPriceOnly' => [
+                    'type'    => 'choice',
+                    'options' => [
+                        'choices'  => [
+                            'all' 			=> 'Export all',
+                            'withoutPrices' => 'Export all without prices',
+                            'onlyPrices'	=> 'Export only prices'
+                        ],
+                        'required' => true,
+                        'select2'  => true,
+                        'label'    => 'dnd_magento_connector.export.exportPriceOnly.label',
+                        'help'     => 'dnd_magento_connector.export.exportPriceOnly.help'
+                    ]
+                ]
+            ]
+        );
     }
-
 }
