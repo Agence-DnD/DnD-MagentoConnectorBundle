@@ -146,19 +146,23 @@ class FileWriter extends BaseFileWriter
     {
         parent::flush();
 
-        $sftpConnection = new SFTPConnection($this->getHost(), $this->getPort());
-        $sftpConnection->login($this->getUsername(), $this->getPassword());
-        $sftpConnection->uploadFile($this->getFilePath(), $this->getRemoteFilePath());
+        if (file_exists($this->getFilePath())) {
+            $sftpConnection = new SFTPConnection($this->getHost(), $this->getPort());
+            $sftpConnection->login($this->getUsername(), $this->getPassword());
+            $sftpConnection->uploadFile($this->getFilePath(), $this->getRemoteFilePath());
 
-        $this->stepExecution->addSummaryInfo(
-            "dnd_magento_connector.export.remote_file_created",
-            sprintf(
-                "sftp://%s:%s%s",
-                $this->getHost(),
-                $this->getPort(),
-                $this->getRemoteFilePath()
-            )
-        );
+            $this->stepExecution->addSummaryInfo(
+                "dnd_magento_connector.export.remote_file_created",
+                sprintf(
+                    "sftp://%s:%s%s",
+                    $this->getHost(),
+                    $this->getPort(),
+                    $this->getRemoteFilePath()
+                )
+            );
+        } else {
+            $this->stepExecution->addSummaryInfo("dnd_magento_connector.export.no_remote_file_created", "");
+        }
     }
 
     /**

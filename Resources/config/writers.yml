@@ -12,4 +12,5 @@ services:
         class: %dnd_magento_connector.writer.file.csv_product.class%
         arguments:
             - '@pim_catalog.repository.attribute'
+            - '@pim_catalog.manager.channel'
             - '@pim_catalog.manager.media'

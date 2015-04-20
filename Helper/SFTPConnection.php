@@ -65,7 +65,7 @@ class SFTPConnection
     {
         $sftp = $this->sftp;
 
-		$stream = @fopen("ssh2.sftp://". $sftp . $remoteFile, 'w');
+        $stream = @fopen("ssh2.sftp://". $sftp . $remoteFile, 'w');
 
         if (!$stream) {
             throw new \Exception("Could not open remote file for writing: $remoteFile");
@@ -76,8 +76,6 @@ class SFTPConnection
         if ($fileContent === false) {
             throw new \Exception("Could not open local file for reading: $localFile.");
         }
-        echo "DEBUG fileocntent:";
-        var_dump($fileContent);
 
         if (@fwrite($stream, $fileContent) === false) {
             throw new \Exception("Could not send data from local file $localFile to remote file $remoteFile.");
@@ -94,9 +92,9 @@ class SFTPConnection
      */
     public function createDirectory($path)
     {
-	    $sftp = $this->sftp;
+        $sftp = $this->sftp;
 
-	    if (!is_dir("ssh2.sftp://". $sftp . $path)) {
+        if (!is_dir("ssh2.sftp://". $sftp . $path)) {
             $stream = @mkdir("ssh2.sftp://". $sftp . $path, 0777, true);
             if (!$stream) {
                 throw new \Exception("Could not create directory: $path");

@@ -69,3 +69,4 @@ job_execution:
         dnd_magento_connector:
             export:
                 remote_file_created: Fichier distant créé
+                no_remote_file_created: <strong>Attention</strong> Aucun fichier distant créé. Causes possibles: aucune donnée à exporter or variable (%date_time%) utilisée

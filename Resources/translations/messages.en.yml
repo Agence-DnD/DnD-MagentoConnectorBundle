@@ -45,7 +45,7 @@ dnd_magento_connector:
             help: Do we also export the images of the products
         exportFrom:
             label: Last product modification date
-            help: date format YYYY-MM-DD h:m:s
+            help: date format YYYY-MM-DD h:m:s (leave blank to export product updated since last export)
         batchExportID:
             label: Export Product ID
             help: You can find this information at the end of the current url
@@ -69,3 +69,4 @@ job_execution:
         dnd_magento_connector:
             export:
                 remote_file_created: Remote file created
+                no_remote_file_created: <strong>Warning</strong> No Remote file created. Maybe no data to export or placeholder (%date_time%) used ?
