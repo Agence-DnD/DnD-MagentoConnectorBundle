@@ -1,1 +1,16 @@
-parameters:    dnd_magento_connector.writer.file.class:             DnD\Bundle\MagentoConnectorBundle\Writer\File\FileWriter    dnd_magento_connector.writer.file.csv.class:         DnD\Bundle\MagentoConnectorBundle\Writer\File\CsvWriter    dnd_magento_connector.writer.file.csv_product.class: DnD\Bundle\MagentoConnectorBundle\Writer\File\CsvProductWriter    services:    dnd_magento_connector.writer.file:        class: %dnd_magento_connector.writer.file.class%    dnd_magento_connector.writer.file.csv:        class: %dnd_magento_connector.writer.file.csv.class%    dnd_magento_connector.writer.file.csv_product:        class: %dnd_magento_connector.writer.file.csv_product.class%        arguments:            - '@pim_catalog.manager.media'            - '@doctrine.orm.entity_manager'            - '@pim_catalog.manager.channel'
+parameters:
+    dnd_magento_connector.writer.file.class:             DnD\Bundle\MagentoConnectorBundle\Writer\File\FileWriter
+    dnd_magento_connector.writer.file.csv.class:         DnD\Bundle\MagentoConnectorBundle\Writer\File\CsvWriter
+    dnd_magento_connector.writer.file.csv_product.class: DnD\Bundle\MagentoConnectorBundle\Writer\File\CsvProductWriter
+
+services:
+    dnd_magento_connector.writer.file:
+        class: %dnd_magento_connector.writer.file.class%
+    dnd_magento_connector.writer.file.csv:
+        class: %dnd_magento_connector.writer.file.csv.class%
+    dnd_magento_connector.writer.file.csv_product:
+        class: %dnd_magento_connector.writer.file.csv_product.class%
+        arguments:
+            - '@pim_catalog.repository.attribute'
+            - '@pim_catalog.manager.channel'
+            - '@pim_catalog.manager.media'

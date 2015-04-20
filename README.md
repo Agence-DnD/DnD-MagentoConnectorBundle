@@ -36,26 +36,26 @@ Get composer (with command line) :
 
 Install DnD-MagentoConnectorBundle with composer :
 
-In your composer.json, add the following code :
+In your composer.json, add the following code in the `repositories` section:
 
-- In repositories :
+```json
 
     {
         "type": "vcs",
         "url": "http://github.com/Agence-DnD/DnD-MagentoConnectorBundle.git"
     }
+```
+And execute the following `composer` command:
 
-- In require :
-
-    "agencednd/magento-connector-bundle":"1.2"
-
-Next, enter the following command line :
-
-    $php composer.phar update
+```bash
+    $ composer require agencednd/magento-connector-bundle 1.2
+```
 
 Enable the bundle in 'app/AppKernel.php' file, in the 'registerBundles' function, before the line 'return $bundles' :
 
+```php
     $bundles[] = new DnD\Bundle\MagentoConnectorBundle\DnDMagentoConnectorBundle();
+```
 
 ## Configuration
 
@@ -63,13 +63,17 @@ Go to Spread > Export and then create your DnDMagentoConnectorBundle export type
 
 It is recommend to create exports with an explicit code, below an example of what you can enter :
 
+```
 companyname_environment_categories_export
 companyname_environment_family_export
 companyname_environment_attribute_export
 companyname_environment_attribute_option_export
 companyname_environment_product_export
+```
 
-Above, companyname match with the name of your company and environment is the environment on which you make your exports (devel, preprod, prod).
+Above, `companyname` match with the name of your company and `environment` is the environment to where you want to export(devel, staging, prod).
+
+WARNING: in the export configuration, do not use place holder variables in the file name (`%date_time%` for example), otherwise the SFTP export will fail
 
 - Products export :
 
@@ -113,11 +117,13 @@ Other exports overview :
 
 To set up a cronjob which allow you to computerize exports (below an example for everyday at 4am) :
 
-    $ 0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_categories_export --env=prod
-    $ 0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_family_export --env=prod
-    $ 0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_attribute_export --env=prod
-    $ 0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_attribute_option_export --env=prod
-    $ 0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_product_export --env=prod
+```crontab
+    0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_categories_export --env=prod
+    0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_family_export --env=prod
+    0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_attribute_export --env=prod
+    0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_attribute_option_export --env=prod
+    0 4 * * * cd path/to/pim/; php app/console akeneo:batch:job companyname_environment_product_export --env=prod
+```
 
 ## Roadmap
 
