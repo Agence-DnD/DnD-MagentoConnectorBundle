@@ -325,9 +325,9 @@ class CsvProductWriter extends CsvWriter
                         'type'    => 'choice',
                         'options' => array(
                             'choices'  => array(
-                                'all' 			=> 'Tout exporter',
-                                'withoutPrices' => 'Tout exporter sauf les prix',
-                                'onlyPrices'	=> 'Exporter les prix uniquement'
+                                'all'           => 'dnd_magento_connector.export.exportPriceOnly.choices.all',
+                                'withoutPrices' => 'dnd_magento_connector.export.exportPriceOnly.choices.withoutPrices',
+                                'onlyPrices'    => 'dnd_magento_connector.export.exportPriceOnly.choices.onlyPrices',
                             ),
                             'required' => true,
                             'select2'  => true,
