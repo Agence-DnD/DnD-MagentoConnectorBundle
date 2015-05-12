@@ -47,7 +47,7 @@ In your ```composer.json```, add the following code:
 ```
 * In `require`:
 ```json
-"agencednd/magento-connector-bundle":"1.2"
+"agencednd/magento-connector-bundle":"1.2.*"
 ```
 
 Next, enter the following command line:
