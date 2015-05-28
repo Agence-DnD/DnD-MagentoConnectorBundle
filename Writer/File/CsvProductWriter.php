@@ -182,11 +182,6 @@ class CsvProductWriter extends CsvWriter
         }
 
         $this->items = array_merge($this->items, $products);
-        $sftpConnection = new SFTPConnection($this->getHost(), $this->getPort());
-        $sftpConnection->login($this->getUsername(), $this->getPassword());
-        if(file_exists($this->getFilePath())){
-	        $sftpConnection->uploadFile($this->getFilePath(), $this->getRemoteFilePath());
-        }
     }
 
     /**
