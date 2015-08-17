@@ -20,11 +20,12 @@ class AttributeProcessor extends AbstractConfigurableStepElement implements Item
      */
     public function process($item)
     {
-	    $result = [];
+        $result = [];
         $result['type']                   = $item->getAttributeType();
         $result['code']                   = $item->getCode();
-        $result['label-en_US']            = $item->setLocale('en_US')->getLabel();
-        $result['label-fr_FR']            = $item->setLocale('fr_FR')->getLabel();
+        foreach($item->getTranslations() as $trans) {
+            $result['label-'.$trans->getLocale()] = $item->setLocale($trans->getLocale())->getLabel();;
+        }
         $result['group']                  = $item->getGroup()->getCode();
         $result['unique']                 = ($item->isUnique()) ? 1 : 0;
         $result['useable_as_grid_filter'] = ($item->isUseableAsGridFilter()) ? 1 : 0;
