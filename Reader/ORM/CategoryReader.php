@@ -24,11 +24,23 @@ class CategoryReader extends Reader
     protected $excludedCategories;
 
     /**
+     * @var array
+     */
+    protected $expression;
+
+    /**
+     * @var int
+     */
+    protected $categoriesNumber;
+
+    /**
      * @param EntityRepository $categoryRepository
      */
     public function __construct(EntityRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
+        $this->expression         = array();
+        $this->categoriesNumber   = 0;
     }
 
     /**
@@ -64,37 +76,34 @@ class CategoryReader extends Reader
             $qb = $this->categoryRepository->createQueryBuilder('c');
             if($this->getExcludedCategories() != ''){
                 $categories = explode(',', $this->getExcludedCategories());
-                $i = 0;
                 foreach($categories as $cat){
-                    if($i == 0){
+                    if($this->categoriesNumber == 0){
                         $qb->where(
                             $qb->expr()->orX(
-                                $qb->expr()->neq('c.code', ':code'.$i)
+                                $qb->expr()->neq('c.code', ':code'. $this->categoriesNumber)
                             )
                         );
-                        $qb->setParameter('code'.$i, $cat);
+                        $qb->setParameter('code'.$this->categoriesNumber, $cat);
                     }else{
                         $qb->andWhere(
                             $qb->expr()->orX(
-                                $qb->expr()->neq('c.code', ':code'.$i)
+                                $qb->expr()->neq('c.code', ':code'.$this->categoriesNumber)
                             )
                         );
-                        $qb->setParameter('code'.$i, $cat);
+                        $qb->setParameter('code'.$this->categoriesNumber, $cat);
                     }
-                    $i++;
-                    $children = $this->getCategoryChildren($cat);
-                    if($children != NULL){
-                        foreach($children as $child){
-                            $qb->andWhere(
-                                $qb->expr()->orX(
-                                    $qb->expr()->neq('c.code', ':code'.$i)
-                                )
-                            );
-                            $qb->setParameter('code'.$i, $child["code"]);
-                            $i++;
-                        }
+                    $this->categoriesNumber++;
+                    $this->recursiveCategories($cat);
+                }
+                if(!empty($this->expression)){
+                    foreach ($this->expression as $key => $value) {
+                        $qb->andWhere(
+                            $qb->expr()->orX(
+                                $qb->expr()->neq('c.code', ':code'.$key)
+                            )
+                        );
+                        $qb->setParameter('code'.$key, $value);
                     }
-
                 }
             }
             $qb
@@ -106,6 +115,23 @@ class CategoryReader extends Reader
         }
 
         return $this->query;
+    }
+
+    /**
+     * Remove categories children recursively
+     */
+    protected function recursiveCategories($cat)
+    {
+        $children = $this->getCategoryChildren($cat);
+        if($children == NULL){
+            return;
+        }else{
+            foreach($children as $child){
+                $this->categoriesNumber++;
+                $this->expression[$this->categoriesNumber] = $child["code"];
+                $this->recursiveCategories($child["code"]);
+            }
+        }
     }
 
     /**
